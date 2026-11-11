@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e2238">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="512x512" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="NRR Calculator Pro">
+<title>NRR Calculator Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{display:['"Barlow Condensed"','Arial Narrow','sans-serif'],sans:['Barlow','system-ui','sans-serif']},colors:{pitch:{50:'#effaf1',100:'#d7f1dc',500:'#1f9d55',600:'#168044',700:'#146637',900:'#0c3b22'},board:'#0e2238'}}}}
+</script>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:Barlow,system-ui,sans-serif}
+body>header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#0e2238;z-index:10}
+.view{animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view{animation:none}*{transition:none!important}}
+input[type=number]::-webkit-inner-spin-button{display:none}
+input:focus,select:focus,button:focus-visible{outline:2px solid #1f9d55;outline-offset:1px}
+</style>
+</head>
+<body class="bg-stone-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen">
+<header class="bg-board text-white">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap gap-y-1 items-center justify-between">
+    <button onclick="go('home')" class="font-display text-2xl font-bold tracking-wide flex items-center gap-2.5"><svg class="shrink-0" width="35" height="40" viewBox="0 0 336 392" preserveAspectRatio="xMidYMid meet" style="display:block;width:35px;height:40px;max-width:none" role="img" aria-label="NRR Calculator Pro logo"><defs><linearGradient id="lh-wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f6d9a2"/><stop offset="1" stop-color="#e3b273"/></linearGradient><linearGradient id="lh-grip" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2fb36a"/><stop offset="1" stop-color="#1b8a4a"/></linearGradient><linearGradient id="lh-calc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#25a65f"/><stop offset="1" stop-color="#146637"/></linearGradient><radialGradient id="lh-ball" cx=".3" cy=".25" r=".95"><stop offset="0" stop-color="#ff5d3e"/><stop offset=".45" stop-color="#d12a22"/><stop offset="1" stop-color="#780e0e"/></radialGradient><radialGradient id="lh-shade" cx=".35" cy=".3" r=".85"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></radialGradient><clipPath id="lh-bc"><circle cx="392" cy="392" r="60"/></clipPath></defs><g transform="matrix(1.1 0 0 1.1 -144.6 -160.2)"><g transform="translate(246 268) rotate(40) scale(.62)"><defs><clipPath id="lh-bladeClip"><path d="M-11 -68H11Q15 -58 24 -52Q44 -44 50 -28V196Q50 224 24 226H-24Q-50 224 -50 196V-28Q-44 -44 -24 -52Q-15 -58 -11 -68Z"/></clipPath><linearGradient id="lh-face" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbe5b8"/><stop offset=".6" stop-color="#f0c98a"/><stop offset="1" stop-color="#e2ad6a"/></linearGradient></defs><rect x="-9" y="-98" width="18" height="38" rx="3" fill="#d09550"/><rect x="-9" y="-98" width="6" height="38" rx="3" fill="#fff" opacity=".25"/><rect x="-14" y="-240" width="28" height="26" rx="10" fill="#f08a24"/><rect x="-9" y="-236" width="6" height="14" rx="3" fill="#fff" opacity=".4"/><rect x="-12" y="-214" width="24" height="124" rx="5"
+ fill="url(#lh-grip)"/><rect x="-12" y="-202" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-178" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-154" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-130" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-106" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-214" width="6" height="124" rx="3" fill="#fff" opacity=".16"/><path d="M-11 -68H11Q15 -58 24 -52Q44 -44 50 -28V196Q50 224 24 226H-24Q-50 224 -50 196V-28Q-44 -44 -24 -52Q-15 -58 -11 -68Z" fill="url(#lh-face)"/><g clip-path="url(#lh-bladeClip)"><g stroke="#d9a964" stroke-width="1.6" opacity=".6" fill="none" stroke-linecap="round"><path d="M-36 -30V190"/><path d="M-27 -21V177"/><path d="M-18 -26V184"/><path d="M-9 -17V171"/><path d="M0 -22V178"/><path d="M9 -27V185"/><path d="M18 -18V172"/><path d="M27 -23V179"/><path d="M36 -28V186"/></g><path d="M-27 -52Q0 -6 27 -52L12 -70H-12Z" fill="#c98a45"/><path d="M-27 -52Q0 -6 27 -52" fill="none" stroke="#fff3d6" stroke-width="2.4" opacity=".8"/><rect x="-52" y="-30" width="9" height="260" fill="#c98a45" opacity=".55"/><rect x="43" y="-30" width="9" height="260" fill="#a9692c" opacity=".6"/><rect x="-43" y="-30" width="2.5" height="260" fill="#fff" opacity=".35"/><rect x="-52" y="52" width="104" height="22" fill="#168044"/><rect x="-52" y="58" width="104" height="2.5" fill="#d7f1dc"/><rect x="-52" y="66" width="104" height="2.5" fill="#d7f1dc"/><circle cx="0" cy="118" r="17" fill="#fff"/><circle cx="0" cy="118" r="10" fill="#d9362a"/><path d="M-7 114Q0 118 7 114" stroke="#fff4dc" stroke-width="2" fill="none"/><rect x="-52" y="192" width="104" height="36" fill="#a9692c" opacity=".8"/><rect x="-52" y="192" width="104" height="3" fill="#fff" opacity=".35"/></g><path d="M-11 -68H11Q15 -58 24 -52Q44 -44 50 -28V196Q50 224 24 226H-24Q-50 224 -50 196V-28Q-44 -44 -24 -52Q-15 -58 -11 -68Z" fill="none" stroke="#a46a2e" stroke-width="2.6" stroke-linejoin="round" opacity=".9"/></g><g transform
+="translate(352 322) rotate(-6) scale(.64) translate(-255 -260)"><rect x="156" y="120" width="210" height="300" rx="28" fill="#000" opacity=".16"/><rect x="150" y="110" width="210" height="300" rx="28" fill="url(#lh-calc)"/><rect x="172" y="132" width="166" height="64" rx="12" fill="#d7f1dc"/><text x="326" y="180" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="38" fill="#0e2238">+1.25</text><rect x="172" y="218" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="216" y="218" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="260" y="218" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="304" y="218" width="34" height="34" rx="9" fill="#ffb703"/><rect x="172" y="262" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="216" y="262" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="260" y="262" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="304" y="262" width="34" height="34" rx="9" fill="#ffb703"/><rect x="172" y="306" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="216" y="306" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="260" y="306" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="304" y="306" width="34" height="34" rx="9" fill="#ffb703"/><rect x="172" y="350" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="216" y="350" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="260" y="350" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="304" y="350" width="34" height="34" rx="9" fill="#ffb703"/><g stroke="#7a4a00" stroke-width="5" stroke-linecap="round" fill="none"><path d="M313 235H329M321 227V243"/><path d="M313 279H329"/><path d="M314 316L328 330M328 316L314 330"/><path d="M313 367H329"/><circle cx="321" cy="357" r="3" fill="#7a4a00" stroke="none"/><circle cx="321" cy="377" r="3" fill="#7a4a00" stroke="none"/></g></g><g transform="translate(292 438) scale(.78) translate(-392 -392)"><ellipse cx="392" cy="458" rx="56" ry="8" fill="#000" opacity=".18"/><circle cx="392" cy="392" r="60" fill="url(#lh-ball)"/><
+g clip-path="url(#lh-bc)" fill="none"><g transform="rotate(-28 392 392)"><path d="M392 330Q416 392 392 454" stroke="#5e0b0b" stroke-width="22" opacity=".35"/><path d="M382 330Q406 392 382 454" stroke="#6b0d0d" stroke-width="3" stroke-linecap="round"/><path d="M402 330Q426 392 402 454" stroke="#6b0d0d" stroke-width="3" stroke-linecap="round"/><g stroke="#fff4dc" stroke-width="2.2" stroke-linecap="round"><path d="M399.2 330.5L388.4 339.0"/><path d="M403.8 344.6L390.0 344.1"/><path d="M405.3 350.2L393.6 357.5"/><path d="M408.2 364.4L394.7 362.4"/><path d="M409.1 370.0L396.7 375.9"/><path d="M410.3 384.3L397.1 380.7"/><path d="M410.5 389.8L397.5 394.2"/><path d="M410.1 404.1L397.4 399.0"/><path d="M409.6 409.7L396.1 412.5"/><path d="M407.5 423.9L395.4 417.3"/><path d="M406.3 429.5L392.6 430.8"/><path d="M402.5 443.7L391.3 435.7"/><path d="M400.6 449.3L386.9 449.1"/></g></g><circle cx="392" cy="392" r="60" fill="url(#lh-shade)" stroke="none"/><ellipse cx="366" cy="362" rx="19" ry="9" transform="rotate(-40 366 362)" fill="#fff" stroke="none" opacity=".5"/></g></g></g></svg><span>NRR Calculator Pro</span></button>
+    <nav class="flex gap-1 text-sm">
+      <button data-v="home" onclick="go('home')" class="px-3 py-1.5 rounded-md hover:bg-white/10 transition">Home</button>
+      <button data-v="saved" onclick="go('saved')" class="px-3 py-1.5 rounded-md hover:bg-white/10 transition">Saved</button>
+      <button data-v="guide" onclick="go('guide')" class="px-3 py-1.5 rounded-md hover:bg-white/10 transition">Guide</button>
+      <button data-v="contact" onclick="go('contact')" class="px-3 py-1.5 rounded-md hover:bg-white/10 transition">Contact</button>
+    </nav>
+  </div>
+  <div class="h-1 bg-gradient-to-r from-pitch-500 via-sky-500 to-pitch-500"></div>
+</header>
+<main id="app" class="max-w-6xl mx-auto px-4 py-6"></main>
+<div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 bg-board text-white text-sm px-4 py-2 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const blank=()=>({ov:20,r:'',o:'',b:'',w:'',cr:'',co:'',cb:'',cw:''});
+let S={view:'home',n:5,m:[],res:null,saved:[]};
+try{S.saved=JSON.parse(localStorage.getItem('nrr-saved')||'[]')}catch(e){S.saved=[]}
+const persist=()=>{try{localStorage.setItem('nrr-saved',JSON.stringify(S.saved))}catch(e){toast('Saving isn’t available in this browser.')}};
+function toast(t){const e=$('toast');e.textContent=t;e.style.opacity=1;setTimeout(()=>e.style.opacity=0,2200)}
+function go(v){S.view=v;render();window.scrollTo(0,0)}
+const num=v=>v===''||isNaN(+v)?0:+v;
+const ovs=b=>Math.floor(b/6)+'.'+(b%6);
+
+/* NRR rules: all out => full allotted overs count for that innings */
+function calc(ms){
+  let rs=0,bf=0,rc=0,bb=0;const rows=[];
+  ms.forEach((m,i)=>{
+    const ov=num(m.ov);
+    const fOut=num(m.w)>=10, bOut=num(m.cw)>=10;
+    const f=fOut?ov*6:num(m.o)*6+num(m.b);
+    const a=bOut?ov*6:num(m.co)*6+num(m.cb);
+    rs+=num(m.r);bf+=f;rc+=num(m.cr);bb+=a;
+    rows.push({i:i+1,r:num(m.r),f,fOut,cr:num(m.cr),a,bOut});
+  });
+  const fr=bf?rs/(bf/6):0, ar=bb?rc/(bb/6):0;
+  return {rs,bf,rc,bb,fr,ar,nrr:fr-ar,rows};
+}
+const fmt=n=>(n>0?'+':'')+n.toFixed(3);
+
+function render(){
+  const a=$('app');
+  a.innerHTML=({home,setup,inputs,results,saved,guide,contact})[S.view]();
+  a.firstElementChild.classList.add('view');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('bg-white/15',b.dataset.v===S.view));
+}
+const card='bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-xl';
+const btn='px-5 py-2.5 rounded-lg font-semibold transition active:scale-95';
+const pri=btn+' bg-pitch-600 hover:bg-pitch-700 text-white';
+const sec=btn+' border border-stone-300 dark:border-slate-700 hover:bg-stone-100 dark:hover:bg-slate-800';
+
+function home(){
+  const tile=(ic,t,d,v,c)=>`<button onclick="${v}" class="${card} relative overflow-hidden text-left p-5 min-h-[7.5rem] hover:-translate-y-0.5 hover:shadow-md transition group">
+    <div class="relative pr-20"><div class="font-display text-2xl font-semibold">${t}</div>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">${d}</p></div>
+    <span class="absolute -right-2 -bottom-3 text-[5.5rem] leading-none opacity-30 group-hover:opacity-50 transition select-none pointer-events-none" aria-hidden="true">${ic}</span></button>`;
+  return `<section>
+    <div class="bg-board text-white rounded-2xl p-6 sm:p-8 mb-6 relative overflow-hidden">
+      <p class="text-pitch-100 text-sm">Tournament table maths, without the spreadsheet</p>
+      <h1 class="font-display text-5xl lg:text-6xl font-bold mt-1 leading-tight">Work out your team’s Net Run Rate</h1>
+      <p class="text-slate-300 mt-3 max-w-lg">Enter each match, apply the all-out rule automatically, and save the result for later.</p>
+      <button onclick="startCalc()" class="${pri} mt-5">Start a calculation</button>
+      <svg class="absolute -right-2 -bottom-3 opacity-30 select-none pointer-events-none" width="130" height="152" viewBox="0 0 336 392" preserveAspectRatio="xMidYMid meet" style="display:block;width:130px;height:152px;max-width:none" aria-hidden="true"><defs><linearGradient id="lr-wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f6d9a2"/><stop offset="1" stop-color="#e3b273"/></linearGradient><linearGradient id="lr-grip" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2fb36a"/><stop offset="1" stop-color="#1b8a4a"/></linearGradient><linearGradient id="lr-calc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#25a65f"/><stop offset="1" stop-color="#146637"/></linearGradient><radialGradient id="lr-ball" cx=".3" cy=".25" r=".95"><stop offset="0" stop-color="#ff5d3e"/><stop offset=".45" stop-color="#d12a22"/><stop offset="1" stop-color="#780e0e"/></radialGradient><radialGradient id="lr-shade" cx=".35" cy=".3" r=".85"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></radialGradient><clipPath id="lr-bc"><circle cx="392" cy="392" r="60"/></clipPath></defs><g transform="matrix(1.1 0 0 1.1 -144.6 -160.2)"><g transform="translate(246 268) rotate(40) scale(.62)"><defs><clipPath id="lr-bladeClip"><path d="M-11 -68H11Q15 -58 24 -52Q44 -44 50 -28V196Q50 224 24 226H-24Q-50 224 -50 196V-28Q-44 -44 -24 -52Q-15 -58 -11 -68Z"/></clipPath><linearGradient id="lr-face" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbe5b8"/><stop offset=".6" stop-color="#f0c98a"/><stop offset="1" stop-color="#e2ad6a"/></linearGradient></defs><rect x="-9" y="-98" width="18" height="38" rx="3" fill="#d09550"/><rect x="-9" y="-98" width="6" height="38" rx="3" fill="#fff" opacity=".25"/><rect x="-14" y="-240" width="28" height="26" rx="10" fill="#f08a24"/><rect x="-9" y="-236" width="6" height="14" rx="3" fill="#fff" opacity=".4"/><rect x="-12" y="-214" width="24" height="124" rx="5" fill="url(#lr-grip)"/><rect x="-12" y="-202" width="24" height="5" fi
+ll="#fff" opacity=".85"/><rect x="-12" y="-178" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-154" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-130" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-106" width="24" height="5" fill="#fff" opacity=".85"/><rect x="-12" y="-214" width="6" height="124" rx="3" fill="#fff" opacity=".16"/><path d="M-11 -68H11Q15 -58 24 -52Q44 -44 50 -28V196Q50 224 24 226H-24Q-50 224 -50 196V-28Q-44 -44 -24 -52Q-15 -58 -11 -68Z" fill="url(#lr-face)"/><g clip-path="url(#lr-bladeClip)"><g stroke="#d9a964" stroke-width="1.6" opacity=".6" fill="none" stroke-linecap="round"><path d="M-36 -30V190"/><path d="M-27 -21V177"/><path d="M-18 -26V184"/><path d="M-9 -17V171"/><path d="M0 -22V178"/><path d="M9 -27V185"/><path d="M18 -18V172"/><path d="M27 -23V179"/><path d="M36 -28V186"/></g><path d="M-27 -52Q0 -6 27 -52L12 -70H-12Z" fill="#c98a45"/><path d="M-27 -52Q0 -6 27 -52" fill="none" stroke="#fff3d6" stroke-width="2.4" opacity=".8"/><rect x="-52" y="-30" width="9" height="260" fill="#c98a45" opacity=".55"/><rect x="43" y="-30" width="9" height="260" fill="#a9692c" opacity=".6"/><rect x="-43" y="-30" width="2.5" height="260" fill="#fff" opacity=".35"/><rect x="-52" y="52" width="104" height="22" fill="#168044"/><rect x="-52" y="58" width="104" height="2.5" fill="#d7f1dc"/><rect x="-52" y="66" width="104" height="2.5" fill="#d7f1dc"/><circle cx="0" cy="118" r="17" fill="#fff"/><circle cx="0" cy="118" r="10" fill="#d9362a"/><path d="M-7 114Q0 118 7 114" stroke="#fff4dc" stroke-width="2" fill="none"/><rect x="-52" y="192" width="104" height="36" fill="#a9692c" opacity=".8"/><rect x="-52" y="192" width="104" height="3" fill="#fff" opacity=".35"/></g><path d="M-11 -68H11Q15 -58 24 -52Q44 -44 50 -28V196Q50 224 24 226H-24Q-50 224 -50 196V-28Q-44 -44 -24 -52Q-15 -58 -11 -68Z" fill="none" stroke="#a46a2e" stroke-width="2.6" stroke-linejoin="round" opacity=".9"/></g><g transform="translate(352 322) rotate(-6) scale(.64) translate(-255 -260)"><rect
+ x="156" y="120" width="210" height="300" rx="28" fill="#000" opacity=".16"/><rect x="150" y="110" width="210" height="300" rx="28" fill="url(#lr-calc)"/><rect x="172" y="132" width="166" height="64" rx="12" fill="#d7f1dc"/><text x="326" y="180" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="38" fill="#0e2238">+1.25</text><rect x="172" y="218" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="216" y="218" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="260" y="218" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="304" y="218" width="34" height="34" rx="9" fill="#ffb703"/><rect x="172" y="262" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="216" y="262" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="260" y="262" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="304" y="262" width="34" height="34" rx="9" fill="#ffb703"/><rect x="172" y="306" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="216" y="306" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="260" y="306" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="304" y="306" width="34" height="34" rx="9" fill="#ffb703"/><rect x="172" y="350" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="216" y="350" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="260" y="350" width="34" height="34" rx="9" fill="#eaf7ee"/><rect x="304" y="350" width="34" height="34" rx="9" fill="#ffb703"/><g stroke="#7a4a00" stroke-width="5" stroke-linecap="round" fill="none"><path d="M313 235H329M321 227V243"/><path d="M313 279H329"/><path d="M314 316L328 330M328 316L314 330"/><path d="M313 367H329"/><circle cx="321" cy="357" r="3" fill="#7a4a00" stroke="none"/><circle cx="321" cy="377" r="3" fill="#7a4a00" stroke="none"/></g></g><g transform="translate(292 438) scale(.78) translate(-392 -392)"><ellipse cx="392" cy="458" rx="56" ry="8" fill="#000" opacity=".18"/><circle cx="392" cy="392" r="60" fill="url(#lr-ball)"/><g clip-path="url(#lr-bc)" fill="none"><g transform="rotate(-28 392 392
+)"><path d="M392 330Q416 392 392 454" stroke="#5e0b0b" stroke-width="22" opacity=".35"/><path d="M382 330Q406 392 382 454" stroke="#6b0d0d" stroke-width="3" stroke-linecap="round"/><path d="M402 330Q426 392 402 454" stroke="#6b0d0d" stroke-width="3" stroke-linecap="round"/><g stroke="#fff4dc" stroke-width="2.2" stroke-linecap="round"><path d="M399.2 330.5L388.4 339.0"/><path d="M403.8 344.6L390.0 344.1"/><path d="M405.3 350.2L393.6 357.5"/><path d="M408.2 364.4L394.7 362.4"/><path d="M409.1 370.0L396.7 375.9"/><path d="M410.3 384.3L397.1 380.7"/><path d="M410.5 389.8L397.5 394.2"/><path d="M410.1 404.1L397.4 399.0"/><path d="M409.6 409.7L396.1 412.5"/><path d="M407.5 423.9L395.4 417.3"/><path d="M406.3 429.5L392.6 430.8"/><path d="M402.5 443.7L391.3 435.7"/><path d="M400.6 449.3L386.9 449.1"/></g></g><circle cx="392" cy="392" r="60" fill="url(#lr-shade)" stroke="none"/><ellipse cx="366" cy="362" rx="19" ry="9" transform="rotate(-40 366 362)" fill="#fff" stroke="none" opacity=".5"/></g></g></g></svg>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-4">
+      ${tile('💾','Saved calculations',S.saved.length?S.saved.length+' saved on this device.':'Nothing saved yet.','go(\'saved\')','bg-sky-100 text-sky-700')}
+      ${tile('📖','User guide & rules','How NRR works and when full overs count.','go(\'guide\')','bg-amber-100 text-amber-700')}
+      ${tile('✉️','Contact & support','Send feedback or report a problem.','go(\'contact\')','bg-rose-100 text-rose-700')}
+    </div></section>`;
+}
+
+function startCalc(){S.res=null;S.view='setup';render()}
+function setup(){
+  const chips=[1,2,3,4,5,6,8,10,15,20,30,50,75,100].map(i=>`<button onclick="S.n=${i};render()" class="h-11 rounded-lg font-display text-xl font-semibold transition ${S.n===i?'bg-pitch-600 text-white shadow':'bg-stone-100 dark:bg-slate-800 hover:bg-pitch-100 dark:hover:bg-slate-700'}">${i}</button>`).join('');
+  return `<section class="${card} p-5 sm:p-7">
+    <p class="text-sm text-pitch-600 font-semibold">Step 1 of 2</p>
+    <h2 class="font-display text-3xl font-bold mb-1">How many matches?</h2>
+    <p class="text-slate-500 dark:text-slate-400 text-sm mb-5">Pick the number of matches your team has played so far.</p>
+    <label class="text-sm font-medium" for="sel">Number of matches</label>
+    <select id="sel" onchange="S.n=+this.value;render()" class="block w-full sm:w-56 mt-1 mb-5 rounded-lg border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2.5">
+      ${Array.from({length:100},(_,i)=>`<option ${S.n===i+1?'selected':''}>${i+1}</option>`).join('')}</select>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">Quick picks</p><div class="grid grid-cols-5 sm:grid-cols-7 gap-2 mb-6">${chips}</div>
+    <div class="flex gap-3"><button onclick="go('home')" class="${sec}">Back</button><button onclick="toInputs()" class="${pri}">Continue with ${S.n} ${S.n===1?'match':'matches'}</button></div></section>`;
+}
+function toInputs(){
+  while(S.m.length<S.n)S.m.push(blank());
+  S.m=S.m.slice(0,S.n);S.view='inputs';render();window.scrollTo(0,0);
+}
+function upd(i,k,v){S.m[i][k]=v}
+function fld(i,k,label,max,ph='0'){
+  return `<label class="block"><span class="text-xs text-slate-500 dark:text-slate-400">${label}</span>
+  <input type="number" inputmode="numeric" min="0" ${max?`max="${max}"`:''} value="${S.m[i][k]}" placeholder="${ph}" oninput="upd(${i},'${k}',this.value)"
+  class="mt-0.5 w-full rounded-lg border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-2.5 py-2"></label>`;
+}
+function inputs(){
+  const cards=S.m.map((m,i)=>`<div class="${card} p-4 sm:p-5">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="font-display text-2xl font-semibold">Match ${i+1}</h3>
+      <label class="text-sm flex items-center gap-2">Overs per innings <input type="number" min="1" max="50" value="${m.ov}" oninput="upd(${i},'ov',this.value)" class="w-16 rounded-md border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-2 py-1"></label>
+    </div>
+    <div class="grid lg:grid-cols-2 xl:grid-cols-1 gap-4">
+      <div class="rounded-lg bg-pitch-50 dark:bg-pitch-900/30 p-3">
+        <p class="font-semibold text-pitch-700 dark:text-pitch-100 mb-2">Your team batting</p>
+        <div class="grid grid-cols-4 gap-2">${fld(i,'r','Runs')}${fld(i,'o','Overs')}${fld(i,'b','Balls',5)}${fld(i,'w','Wkts lost',10)}</div></div>
+      <div class="rounded-lg bg-sky-50 dark:bg-sky-900/20 p-3">
+        <p class="font-semibold text-sky-700 dark:text-sky-100 mb-2">Opposition batting</p>
+        <div class="grid grid-cols-4 gap-2">${fld(i,'cr','Runs')}${fld(i,'co','Overs')}${fld(i,'cb','Balls',5)}${fld(i,'cw','Wkts taken',10)}</div></div>
+    </div></div>`).join('');
+  return `<section>
+    <p class="text-sm text-pitch-600 font-semibold">Step 2 of 2</p>
+    <h2 class="font-display text-3xl font-bold mb-1">Enter match details</h2>
+    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Overs and balls are separate: 12 overs and 3 balls is entered as 12 and 3. Ten wickets means all out, so the full overs are counted.</p>
+    <div class="grid xl:grid-cols-2 gap-4">${cards}</div>
+    <div class="flex gap-3 mt-6"><button onclick="go('setup')" class="${sec}">Back</button><button onclick="finish()" class="${pri}">Calculate NRR</button></div></section>`;
+}
+function finish(){
+  for(let i=0;i<S.m.length;i++){
+    const m=S.m[i];
+    if(num(m.b)>5||num(m.cb)>5){toast('Match '+(i+1)+': balls must be between 0 and 5.');return}
+    if(num(m.ov)<1){toast('Match '+(i+1)+': set the overs per innings.');return}
+  }
+  S.res=calc(S.m);S.from=null;S.view='results';render();window.scrollTo(0,0);
+}
+function results(){
+  const r=S.res,pos=r.nrr>=0;
+  const stat=(l,v,s)=>`<div class="${card} p-4"><div class="text-xs text-slate-500 dark:text-slate-400">${l}</div><div class="font-display text-3xl font-bold">${v}</div><div class="text-xs text-slate-500 dark:text-slate-400">${s||''}</div></div>`;
+  const rows=r.rows.map(x=>`<tr class="border-t border-stone-200 dark:border-slate-800"><td class="py-2 pr-3 font-medium">${x.i}</td><td class="pr-3">${x.r}</td><td class="pr-3">${ovs(x.f)}${x.fOut?' <span class="text-xs text-amber-600">all out</span>':''}</td><td class="pr-3">${x.cr}</td><td>${ovs(x.a)}${x.bOut?' <span class="text-xs text-amber-600">all out</span>':''}</td></tr>`).join('');
+  return `<section>
+    <div class="bg-board text-white rounded-2xl p-6 sm:p-8 text-center mb-5">
+      <p class="text-slate-300 text-sm">Net Run Rate after ${r.rows.length} ${r.rows.length===1?'match':'matches'}</p>
+      <div class="font-display font-bold text-7xl sm:text-8xl my-1 ${pos?'text-emerald-400':'text-rose-400'}">${fmt(r.nrr)}</div>
+      <p class="text-slate-300 text-sm">${r.fr.toFixed(3)} scored per over − ${r.ar.toFixed(3)} conceded per over</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+      ${stat('Runs scored',r.rs)}${stat('Overs faced',ovs(r.bf),'Run rate '+r.fr.toFixed(3))}
+      ${stat('Runs conceded',r.rc)}${stat('Overs bowled',ovs(r.bb),'Run rate '+r.ar.toFixed(3))}
+    </div>
+    <div class="${card} p-4 mb-5 overflow-x-auto">
+      <h3 class="font-display text-xl font-semibold mb-2">Match breakdown</h3>
+      <table class="w-full text-sm min-w-[420px]"><thead><tr class="text-left text-slate-500 dark:text-slate-400"><th class="pb-2">Match</th><th>Runs scored</th><th>Overs faced</th><th>Runs conceded</th><th>Overs bowled</th></tr></thead><tbody>${rows}</tbody></table>
+    </div>
+    <div class="${card} p-4 mb-5 flex flex-col sm:flex-row gap-3 sm:items-end">
+      <label class="flex-1 text-sm">Name this calculation<input id="nm" placeholder="e.g. League stage" class="mt-1 w-full rounded-lg border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2.5"></label>
+      <button onclick="save()" class="${pri}">Save calculation</button></div>
+    <div class="flex flex-wrap gap-3">${S.from==='saved'?`<button onclick="go('saved')" class="${sec}">Back to saved</button>`:''}<button onclick="go('inputs')" class="${sec}">Edit matches</button><button onclick="startCalc()" class="${sec}">New calculation</button><button onclick="go('home')" class="${sec}">Home</button></div></section>`;
+}
+function save(){
+  const name=($('nm').value||'').trim()||'Calculation '+(S.saved.length+1);
+  S.saved.unshift({id:Date.now(),name,date:new Date().toLocaleDateString(),nrr:S.res.nrr,m:JSON.parse(JSON.stringify(S.m))});
+  persist();toast('Saved “'+name+'”');
+}
+function saved(){
+  if(!S.saved.length)return `<section class="${card} p-8 text-center"><h2 class="font-display text-3xl font-bold">No saved calculations</h2><p class="text-slate-500 dark:text-slate-400 mt-1 mb-4">Calculate an NRR and choose Save calculation to keep it here.</p><button onclick="startCalc()" class="${pri}">Calculate NRR</button> <button onclick="go('home')" class="${sec} ml-2">Back</button></section>`;
+  return `<section><button onclick="go('home')" class="${sec} !px-3 !py-1.5 text-sm mb-4">Back</button><h2 class="font-display text-3xl font-bold mb-4">Saved calculations</h2><div class="grid lg:grid-cols-2 gap-3">${S.saved.map(s=>`
+    <div class="${card} p-4 flex items-center gap-3">
+      <div class="flex-1 min-w-0"><div class="font-semibold truncate">${esc(s.name)}</div><div class="text-xs text-slate-500 dark:text-slate-400">${s.m.length} matches, saved ${s.date}</div></div>
+      <div class="font-display text-2xl font-bold ${s.nrr>=0?'text-pitch-600':'text-rose-500'}">${fmt(s.nrr)}</div>
+      <button onclick="openSaved(${s.id})" class="${sec} !px-3 !py-1.5 text-sm">Open</button>
+      <button onclick="del(${s.id})" aria-label="Delete" class="text-slate-400 hover:text-rose-500 px-2 text-lg">✕</button></div>`).join('')}</div></section>`;
+}
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function openSaved(id){const s=S.saved.find(x=>x.id===id);if(!s)return;S.m=JSON.parse(JSON.stringify(s.m));S.n=S.m.length;S.res=calc(S.m);S.from='saved';go('results')}
+function del(id){S.saved=S.saved.filter(x=>x.id!==id);persist();render()}
+const CONTACT_EMAIL='kaziabid394@gmail.com';
+function contact(){
+  const f='mt-1 w-full rounded-lg border border-stone-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2.5';
+  return `<section class="${card} p-5 sm:p-7 max-w-xl"><h2 class="font-display text-3xl font-bold mb-1">Contact &amp; support</h2>
+    <p class="text-slate-500 dark:text-slate-400 text-sm mb-5">Send feedback, report a problem or ask a question. Sending opens your email app with the message ready.</p>
+    <label class="block text-sm mb-3">Your name<input id="cn" class="${f}"></label>
+    <label class="block text-sm mb-4">Message<textarea id="cm" rows="5" class="${f}"></textarea></label>
+    <div class="flex gap-3"><button onclick="go('home')" class="${sec}">Back</button><button onclick="sendMsg()" class="${pri}">Send message</button></div>
+    <h3 class="font-display text-xl font-semibold mt-6 mb-2">Other ways to reach me</h3>
+    <div class="grid sm:grid-cols-2 gap-3">
+      <a href="tel:+8801627375769" class="${card} p-3 flex items-center gap-3 hover:shadow-md transition"><span class="text-xl">📞</span><span><span class="block text-xs text-slate-500 dark:text-slate-400">Phone / Mobile</span><span class="font-semibold">+8801627375769</span></span></a>
+      <a href="https://wa.me/8801627375769" target="_blank" rel="noopener" class="${card} p-3 flex items-center gap-3 hover:shadow-md transition"><svg class="w-7 h-7 shrink-0" viewBox="0 0 24 24" role="img" aria-label="WhatsApp"><path fill="#25D366" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.88 9.88zM20.52 3.45A11.82 11.82 0 0012.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 005.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.4z"/></svg><span><span class="block text-xs text-slate-500 dark:text-slate-400">WhatsApp</span><span class="font-semibold">+8801627375769</span></span></a>
+      <a href="https://t.me/kaziabid394" target="_blank" rel="noopener" class="${card} p-3 flex items-center gap-3 hover:shadow-md transition"><svg class="w-7 h-7 shrink-0" viewBox="0 0 24 24" role="img" aria-label="Telegram"><circle cx="12" cy="12" r="12" fill="#26A5E4"/><path fill="#fff" d="M5.43 11.87l11.6-4.47c.54-.2 1.01.13.83.96l-1.98 9.3c-.15.66-.54.82-1.09.51l-3-2.21-1.45 1.4c-.16.16-.3.3-.6.3l.21-3.05 5.56-5.02c.24-.21-.05-.33-.38-.12l-6.87 4.33-2.96-.92c-.64-.2-.66-.64.14-.95z"/></svg><span><span class="block text-xs text-slate-500 dark:text-slate-400">Telegram</span><span class="font-semibold">@kaziabid394</span></span></a>
+      <a href="https://facebook.com/kaziabid394" target="_blank" rel="noopener" class="${card} p-3 flex items-center gap-3 hover:shadow-md transition"><svg class="w-7 h-7 shrink-0" viewBox="0 0 24 24" role="img" aria-label="Facebook"><rect width="24" height="24" rx="5" fill="#1877F2"/><path fill="#fff" d="M16.67 15.47l.53-3.47h-3.33V9.75c0-.95.47-1.88 1.96-1.88h1.51V4.92s-1.37-.23-2.68-.23c-2.74 0-4.53 1.66-4.53 4.67V12H7.06v3.47h3.07V24h3.74v-8.53z"/></svg><span><span class="block text-xs text-slate-500 dark:text-slate-400">Facebook</span><span class="font-semibold">@kaziabid394</span></span></a>
+      <a href="mailto:${CONTACT_EMAIL}" class="${card} p-3 flex items-center gap-3 hover:shadow-md transition"><svg class="w-8 h-6 shrink-0" viewBox="0 0 810 645" role="img" aria-label="Gmail"><defs><linearGradient id="gmA" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="810" y2="0"><stop offset="0" stop-color="#FF67B0"/><stop offset=".22" stop-color="#FB4141"/><stop offset=".62" stop-color="#FB4141"/><stop offset=".75" stop-color="#FF7A26"/><stop offset=".88" stop-color="#FFC107"/><stop offset="1" stop-color="#FFE30D"/></linearGradient><linearGradient id="gmB" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="0" y2="645"><stop offset="0" stop-color="#55CC6A"/><stop offset=".3" stop-color="#12B95C"/><stop offset=".6" stop-color="#00AAC4"/><stop offset="1" stop-color="#3587FF"/></linearGradient></defs><path fill="#FB4141" d="M0 88V590Q0 645 55 645H160Q175 645 175 630V88Z"/><path fill="url(#gmB)" d="M635 88V630Q635 645 650 645H755Q810 645 810 590V88Z"/><path d="M88 88L405 370L722 88" fill="none" stroke="url(#gmA)" stroke-width="176" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="min-w-0"><span class="block text-xs text-slate-500 dark:text-slate-400">Gmail</span><span class="font-semibold break-all">${CONTACT_EMAIL}</span></span></a>
+    </div></section>`;
+}
+function sendMsg(){
+  const n=$('cn').value.trim(),m=$('cm').value.trim();
+  if(!m){toast('Write a message first.');return}
+  location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('NRR Calculator Pro feedback')+'&body='+encodeURIComponent(m+(n?'\n\n'+n:''));
+}
+function guide(){
+  const p=(t,d)=>`<div class="${card} p-4 h-full min-w-0"><h3 class="font-display text-xl font-semibold">${t}</h3><p class="text-sm text-slate-600 dark:text-slate-300 mt-1">${d}</p></div>`;
+  return `<section><h2 class="font-display text-3xl font-bold mb-4">User guide and rules</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-4">
+    ${p('The formula','NRR = (total runs scored ÷ total overs faced) − (total runs conceded ÷ total overs bowled).')}
+    ${p('Overs and balls','An over has 6 balls, so 12.3 overs means 12 overs and 3 balls, or 75 balls. The calculator works in balls to avoid decimal mistakes.')}
+    ${p('All out rule','If a side is bowled out, the full allotted overs count as faced, not the overs actually used. This applies to your team and to the opposition.')}
+    ${p('Wickets','Enter 10 wickets lost (your team) or 10 wickets taken (opposition) to mark an innings as all out. Chasing teams that win with wickets in hand use their real overs.')}
+    ${p('Matches without a result','Matches abandoned without a ball bowled are left out of NRR. Don’t add them here.')}
+    ${p('Rain-shortened matches','For interrupted games, use the revised target and revised overs from the official scorecard in the overs per innings field.')}
+  </div><div class="flex gap-3 mt-5"><button onclick="go('home')" class="${sec}">Back</button><button onclick="startCalc()" class="${pri}">Calculate NRR</button></div></section>`;
+}
+render();
+</script>
+</body>
+</html>
